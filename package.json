@@ -8,8 +8,10 @@
   "scripts": {
     "start": "node server/app.js",
     "start:client": "parcel client/react/main.js -d client/output",
-    "build:client": "yarn clean:client && parcel build client/react/main.js -d client/output",
-    "watch:client": "yarn clean:client && parcel watch client/react/main.js -d client/output",
+    "build:client": "parcel build client/react/main.js -d client/output",
+    "watch:client": "parcel watch client/react/main.js -d client/output",
+    "watch:keyword_client": "parcel watch client/react/keyword_main.js -d client/output",
+
     "clean:client": "rm -rf client/output"
   },
   "devDependencies": {
@@ -26,6 +28,8 @@
     "sass": "^1.30.0"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
     "@thumbtack/thumbprint-react": "^14.3.3",
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",

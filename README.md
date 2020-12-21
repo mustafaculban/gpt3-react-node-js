@@ -11,5 +11,3 @@ To watch client side
 yarn watch:client
 ```
 
-
-

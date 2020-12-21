@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {
-  FormControl, InputLabel, MenuItem, Select,
-} from '@material-ui/core';
 
-import { Face } from '@material-ui/icons';
-import { default as FacebookContainer } from './templates/Facebook';
-
-const App = () => {
+const Keyword = () => {
   const [data, setData] = useState(null);
   const [searchValue, setSearchValue] = useState('');
-  const [template, setTemplate] = useState('custom');
   const [queryRunning, isQueryRunning] = useState(false);
-
 
   const handleSearchReq = async () => {
     try {
@@ -33,9 +25,11 @@ const App = () => {
   };
 
   const handleSearch = async () => {
+    isQueryRunning(true);
     const response = await handleSearchReq();
     console.log('response', response.data.data);
     setData(response.data.data ? response.data.data.choices[0].text : 'No Response');
+    isQueryRunning(false);
   };
 
   const handleCompletionsReq = async () => {
@@ -43,7 +37,7 @@ const App = () => {
       const result = await axios.post('/ai/completions', {
         engine: 'davinci',
         prompt: searchValue,
-        max_tokens: 64,
+        max_tokens: 12,
         temperature: 0.0,
         top_p: 1,
         presence_penalty: 0,
@@ -87,29 +81,16 @@ const App = () => {
   };
 
   const handleGenerate = async () => {
+    isQueryRunning(true);
     const response = await handleGenerateReq();
     console.log('response', response.data.data.data[0].text.join(''));
     setData(response.data.data.data[0].text.join(''));
+    isQueryRunning(false);
   };
 
   useEffect(() => {
     console.log('App rendered');
   }, []);
-
-  useEffect(() => {
-    console.log(template);
-  }, [template]);
-
-  const templateContainers = {
-    Facebook: <FacebookContainer
-      searchValue={searchValue}
-      setSearchValue={setSearchValue}
-      setData={setData}
-      isQueryRunning={isQueryRunning}
-      queryRunning={queryRunning}
-      data={data}
-    />,
-  };
 
   return (
     <div className="app">
@@ -118,30 +99,26 @@ const App = () => {
         <h1>OpenAI React App with Node.js server</h1>
       </div>
       <div className="app-cta">
-        <FormControl variant="filled" className="template-select">
-          <InputLabel id="template-label">Ad Template</InputLabel>
-          <Select
-            labelId="template-label"
-            value={template}
-            onChange={(e) => { setTemplate(e.target.value); }}
-            color="secondary"
-          >
-            <MenuItem value="-" disabled selected>Select Template</MenuItem>
-            <MenuItem value="Adwords">Adwords</MenuItem>
-            <MenuItem value="Facebook">Facebook</MenuItem>
-            <MenuItem value="Reddit">Reddit</MenuItem>
-          </Select>
-        </FormControl>
-        {
-          templateContainers[template]
-        }
-
         {/* <button */}
         {/*  type="button" */}
         {/*  onClick={handleSearch} */}
         {/* > */}
         {/*  Send Search Request */}
         {/* </button> */}
+        <div className="queryInput">
+          <textarea disabled={queryRunning} placeholder="Enter text" type="text" value={searchValue} id="searchInput" onChange={(e) => (setSearchValue(e.target.value))} rows={10} cols={50}/>
+        </div>
+        <div className="queryButtons">
+          <button
+            type="button"
+            onClick={handleCompletions}
+          >
+            { !queryRunning ? 'Send Completions Request' : 'Loading...' }
+          </button>
+          <button type="button" onClick={handleGenerate} >
+            { !queryRunning ? 'Send Generate Request' : 'Loading...' }
+          </button>
+        </div>
       </div>
       {
         !queryRunning && data && (
@@ -156,4 +133,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Keyword;
