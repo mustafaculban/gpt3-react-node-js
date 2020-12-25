@@ -6,13 +6,13 @@
   "author": "erdem <erdem@jotform.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node server/app.js",
+    "start": "yarn build:client && node server/app.js",
     "start:client": "parcel client/react/main.js -d client/output",
     "build:client": "parcel build client/react/main.js -d client/output",
-    "watch:client": "parcel watch client/react/main.js -d client/output",
-    "watch:keyword_client": "parcel watch client/react/keyword_main.js -d client/output",
-
-    "clean:client": "rm -rf client/output"
+    "watch:client": "yarn clean:client && parcel watch client/react/main.js -d client/output",
+    "watch:keyword_client": "yarn clean:keyword_client && parcel watch client/react/keyword_main.js -d client/output",
+    "clean:client": "rm -rf client/output/main.*",
+    "clean:keyword_client": "rm -rf client/output/keyword_main.*"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -31,14 +31,22 @@
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
     "@thumbtack/thumbprint-react": "^14.3.3",
+    "@types/react": "^16.8.6 || ^17.0.0",
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "google-ads-api": "^4.0.3",
+    "material-ui-chip-input": "^2.0.0-beta.2",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.6",
     "prop-types": "^15.7.2",
     "pug": "^3.0.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0",
+    "react-router-dom": "^5.2.0",
+    "url-metadata": "^2.5.0"
   }
 }

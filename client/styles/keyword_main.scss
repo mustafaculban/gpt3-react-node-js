@@ -10,7 +10,7 @@
 * {
   box-sizing: border-box;
   font-family: monospace;
-  color:#a0b3c6;
+  color: #a0b3c6;
   margin: 0;
   padding: 0;
 }
@@ -49,11 +49,11 @@ body {
   &-cta {
     margin-top: 32px;
     display: flex;
-    flex:1;
+    flex: 1;
     align-items: center;
     flex-direction: column;
 
-    button, textarea {
+    button, input {
       outline: none;
       border: 0;
       background-color: #f2c177;
@@ -71,9 +71,9 @@ body {
       cursor: pointer;
     }
 
-    .queryInput {
+    .urlInput {
       margin-bottom: 1.5%;
-      width: 40vw;
+      width: 100%;
     }
 
     .template-select {
@@ -83,6 +83,70 @@ body {
       color: #171d23;
       margin-bottom: 16px;
     }
+
+    .accordion {
+      width: 1200px;
+      background: #52295beb;
+
+
+      &__heading {
+        font-size: 15px;
+        flex-basis: 33.33%;
+        flex-shrink: 0;
+      }
+
+      &__details {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      &__landingPageGroup {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &__keywords {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex: 1;
+        align-items: center;
+
+        button {
+          width: 250px;
+          max-height: 39px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+  .MuiInputBase-input.MuiInput-input.WAMuiChipInput-input-7.WAMuiChipInput-standard-10 {
+    background-color: transparent;
+    //color: transparent;
+    border-radius: 16px;
+  }
+  .MuiBottomNavigationAction-label.Mui-selected {
+    font-weight: bolder
+  }
+
+  .MuiBottomNavigationAction-root {
+    max-width: 200px;
+  }
+
+  .MuiChip-label {
+    width: 90%;
+    color: #000;
+  }
+  .MuiChip-deleteIcon > path {
+    color: black;
+    font-weight: 100;
+  }
+  .MuiButtonBase-root.MuiChip-root.WAMuiChipInput-chip-20{
+    background: #f2c177;
+    font-color: #000;
+
   }
 
   &-result {
@@ -90,7 +154,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 90%;
-    max-width: 400px;
+    max-width: 450px;
     height: auto;
 
     pre {

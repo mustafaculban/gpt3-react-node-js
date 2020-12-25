@@ -6,6 +6,8 @@ class OpenAiLib {
       search: '',
     };
 
+    this.apiKey = apiKey;
+
     this.completionsDefaultOptions = {
       prompt: '',
       max_tokens: 5,
@@ -19,6 +21,11 @@ class OpenAiLib {
         Accept: 'application/json',
       },
     };
+  }
+
+  setApiKey(apikey) {
+    this.apiKey = apikey;
+    console.log('apikey:', this.apiKey);
   }
 
   set generateUrl({ key, engine = 'davinci' }) {
